@@ -1,2 +1,2 @@
 # PropelORM
- Ejemplo de uso de Propel ORM
+ Ejemplo de uso de PropelORM, Slimframework y PHP
