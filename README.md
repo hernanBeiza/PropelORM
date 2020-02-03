@@ -29,3 +29,7 @@ Ejecutar
 ```
 composer propel:build
 ```
+
+## Esquema ER
+
+![ER](C:\Users\skizo\Documents\GitHub\PropelORM\docs\ER.png)
