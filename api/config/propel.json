@@ -1,0 +1,43 @@
+{
+  "propel": {
+    "database": {
+      "connections": {
+        "default": {
+          "adapter": "mysql",
+          "classname": "Propel\\Runtime\\Connection\\DebugPDO",
+          "dsn": "mysql:host=mihost;dbname=midb;charset=utf8",
+          "user": "miusuario",
+          "password": "micontrasena",
+          "attributes": []
+        },
+        "tareaconnection": {
+          "adapter": "mysql",
+          "classname": "Propel\\Runtime\\Connection\\DebugPDO",
+          "dsn": "mysql:host=mihost;dbname=midb;charset=utf8",
+          "user": "miusuario",
+          "password": "micontrasena",
+          "attributes": []
+        }
+      }
+    },
+    "runtime": {
+      "defaultConnection": "tareaconnection",
+      "connections": ["tareaconnection"],
+      "log": {
+        "defaultLogger": {
+          "type": "stream",
+          "path": "./../logs/propel.log",
+          "level": 300
+      	},
+      	"tareaconnection": {
+          "type": "stream",
+          "path": "./../logs/propel_db.log"
+      	}
+      }
+    },
+    "generator": {
+      "defaultConnection": "tareaconnection",
+      "connections": ["tareaconnection"]
+    }
+	}
+}

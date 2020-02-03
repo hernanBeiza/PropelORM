@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database name="tareaconnection" defaultIdMethod="native" defaultPhpNamingMethod="underscore" namespace="PropelORMAPI\DAOS">
+  <table name="tarea" idMethod="native" phpName="Tarea">
+    <column name="idtarea" phpName="Idtarea" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="titulo" phpName="Titulo" type="VARCHAR" size="100" required="true" defaultValue=""/>
+    <column name="timestamp" phpName="Timestamp" type="TIMESTAMP" required="true" defaultExpr="CURRENT_TIMESTAMP"/>
+    <column name="valid" phpName="Valid" type="TINYINT" required="true" defaultValue="1"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="usuario" idMethod="native" phpName="Usuario">
+    <column name="idusuario" phpName="Idusuario" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="nombre" phpName="Nombre" type="VARCHAR" size="45"/>
+    <column name="apellido" phpName="Apellido" type="VARCHAR" size="45"/>
+    <column name="valid" phpName="Valid" type="TINYINT" required="true" defaultValue="1"/>
+    <unique name="rut_UNIQUE">
+      <unique-column name="idusuario"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="usuariotarea" idMethod="native" phpName="Usuariotarea" isCrossRef="true">
+    <column name="idusuariotarea" phpName="Idusuariotarea" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="idusuario" phpName="Idusuario" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="idtarea" phpName="Idtarea" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="timestamp" phpName="Timestamp" type="TIMESTAMP" required="true" defaultExpr="CURRENT_TIMESTAMP"/>
+    <column name="valid" phpName="Valid" type="TINYINT" required="true" defaultValue="1"/>
+    <foreign-key foreignTable="tarea" name="fkusuariotareaidtarea">
+      <reference local="idtarea" foreign="idtarea"/>
+    </foreign-key>
+    <foreign-key foreignTable="usuario" name="fkusuariotareaidusuario">
+      <reference local="idusuario" foreign="idusuario"/>
+    </foreign-key>
+    <index name="fkusuariotareaidusuario_idx">
+      <index-column name="idusuario"/>
+    </index>
+    <index name="fkusuariotareaidtarea_idx">
+      <index-column name="idtarea"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+</database>

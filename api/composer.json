@@ -1,0 +1,48 @@
+{
+  "name": "hernanbeiza/propelorm",
+  "description": "Ejemplo de uso de PropelORM",
+  "version": "0.1.0",
+  "authors": [
+    {
+      "name": "Hernán Beiza",
+      "email": "hernan@hiperactivo.cl"
+    }
+  ],
+  "require": {
+    "slim/slim": "^3.8",
+    "slim/php-view": "^2.0",
+    "monolog/monolog": "^1.23",
+    "tuupola/slim-jwt-auth": "^2.4",
+    "sendinblue/api-v3-sdk": "^6.1.0",
+    "vlucas/phpdotenv": "^3.3",
+    "propel/propel": "~2.0@dev"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "PropelORMAPI\\" : "src"
+    },
+	  "psr-0": {
+      "PropelORMAPI\\DAOS\\": "generated-classes"
+    }
+  },
+	"scripts": {
+    "start": "php -S localhost:4000 -t public",
+    "start:dev": "php -S 192.168.41.127:4000 -t public",
+    "test": "./vendor/bin/phpunit",
+    "propel":"propel",
+    "propel:init":"propel init",
+    "propel:reverse:config":"propel reverse --config-dir='config'",
+    "propel:reverse":"propel reverse 'mysql:host=mihost;dbname=midb;user=miusuario;password=micontrasena;charset=UTF8' --verbose --output-dir='propel/schema'",
+    "propel:sql":"propel sql:build --config-dir='config' --schema-dir='propel/schema' --output-dir='propel/sql'",
+    "propel:build2":"propel model:build --config-dir='config' --schema-dir='propel/schema' --output-dir='src/DAOS'",
+    "propel:build":"composer clean && propel model:build --config-dir='config' --schema-dir='propel/schema'",
+		"propel:config": "propel config:convert --output-dir='src/DAOS'",
+		"clean": "rm -rf generated-classes"
+	},
+  "config": {
+    "process-timeout":0
+  }
+}
