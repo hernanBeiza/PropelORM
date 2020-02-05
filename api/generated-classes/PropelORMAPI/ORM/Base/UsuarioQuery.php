@@ -1,12 +1,12 @@
 <?php
 
-namespace PropelORMAPI\DAOS\Base;
+namespace PropelORMAPI\ORM\Base;
 
 use \Exception;
 use \PDO;
-use PropelORMAPI\DAOS\Usuario as ChildUsuario;
-use PropelORMAPI\DAOS\UsuarioQuery as ChildUsuarioQuery;
-use PropelORMAPI\DAOS\Map\UsuarioTableMap;
+use PropelORMAPI\ORM\Usuario as ChildUsuario;
+use PropelORMAPI\ORM\UsuarioQuery as ChildUsuarioQuery;
+use PropelORMAPI\ORM\Map\UsuarioTableMap;
 use Propel\Runtime\Propel;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
@@ -23,11 +23,17 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildUsuarioQuery orderByIdusuario($order = Criteria::ASC) Order by the idusuario column
  * @method     ChildUsuarioQuery orderByNombre($order = Criteria::ASC) Order by the nombre column
  * @method     ChildUsuarioQuery orderByApellido($order = Criteria::ASC) Order by the apellido column
+ * @method     ChildUsuarioQuery orderByUsuario($order = Criteria::ASC) Order by the usuario column
+ * @method     ChildUsuarioQuery orderByContrasena($order = Criteria::ASC) Order by the contrasena column
+ * @method     ChildUsuarioQuery orderByTimestamp($order = Criteria::ASC) Order by the timestamp column
  * @method     ChildUsuarioQuery orderByValid($order = Criteria::ASC) Order by the valid column
  *
  * @method     ChildUsuarioQuery groupByIdusuario() Group by the idusuario column
  * @method     ChildUsuarioQuery groupByNombre() Group by the nombre column
  * @method     ChildUsuarioQuery groupByApellido() Group by the apellido column
+ * @method     ChildUsuarioQuery groupByUsuario() Group by the usuario column
+ * @method     ChildUsuarioQuery groupByContrasena() Group by the contrasena column
+ * @method     ChildUsuarioQuery groupByTimestamp() Group by the timestamp column
  * @method     ChildUsuarioQuery groupByValid() Group by the valid column
  *
  * @method     ChildUsuarioQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
@@ -48,7 +54,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildUsuarioQuery rightJoinWithUsuariotarea() Adds a RIGHT JOIN clause and with to the query using the Usuariotarea relation
  * @method     ChildUsuarioQuery innerJoinWithUsuariotarea() Adds a INNER JOIN clause and with to the query using the Usuariotarea relation
  *
- * @method     \PropelORMAPI\DAOS\UsuariotareaQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
+ * @method     \PropelORMAPI\ORM\UsuariotareaQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
  *
  * @method     ChildUsuario findOne(ConnectionInterface $con = null) Return the first ChildUsuario matching the query
  * @method     ChildUsuario findOneOrCreate(ConnectionInterface $con = null) Return the first ChildUsuario matching the query, or a new ChildUsuario object populated from the query conditions when no match is found
@@ -56,6 +62,9 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildUsuario findOneByIdusuario(int $idusuario) Return the first ChildUsuario filtered by the idusuario column
  * @method     ChildUsuario findOneByNombre(string $nombre) Return the first ChildUsuario filtered by the nombre column
  * @method     ChildUsuario findOneByApellido(string $apellido) Return the first ChildUsuario filtered by the apellido column
+ * @method     ChildUsuario findOneByUsuario(string $usuario) Return the first ChildUsuario filtered by the usuario column
+ * @method     ChildUsuario findOneByContrasena(string $contrasena) Return the first ChildUsuario filtered by the contrasena column
+ * @method     ChildUsuario findOneByTimestamp(string $timestamp) Return the first ChildUsuario filtered by the timestamp column
  * @method     ChildUsuario findOneByValid(int $valid) Return the first ChildUsuario filtered by the valid column *
 
  * @method     ChildUsuario requirePk($key, ConnectionInterface $con = null) Return the ChildUsuario by primary key and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
@@ -64,12 +73,18 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildUsuario requireOneByIdusuario(int $idusuario) Return the first ChildUsuario filtered by the idusuario column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildUsuario requireOneByNombre(string $nombre) Return the first ChildUsuario filtered by the nombre column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildUsuario requireOneByApellido(string $apellido) Return the first ChildUsuario filtered by the apellido column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildUsuario requireOneByUsuario(string $usuario) Return the first ChildUsuario filtered by the usuario column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildUsuario requireOneByContrasena(string $contrasena) Return the first ChildUsuario filtered by the contrasena column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildUsuario requireOneByTimestamp(string $timestamp) Return the first ChildUsuario filtered by the timestamp column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildUsuario requireOneByValid(int $valid) Return the first ChildUsuario filtered by the valid column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  *
  * @method     ChildUsuario[]|ObjectCollection find(ConnectionInterface $con = null) Return ChildUsuario objects based on current ModelCriteria
  * @method     ChildUsuario[]|ObjectCollection findByIdusuario(int $idusuario) Return ChildUsuario objects filtered by the idusuario column
  * @method     ChildUsuario[]|ObjectCollection findByNombre(string $nombre) Return ChildUsuario objects filtered by the nombre column
  * @method     ChildUsuario[]|ObjectCollection findByApellido(string $apellido) Return ChildUsuario objects filtered by the apellido column
+ * @method     ChildUsuario[]|ObjectCollection findByUsuario(string $usuario) Return ChildUsuario objects filtered by the usuario column
+ * @method     ChildUsuario[]|ObjectCollection findByContrasena(string $contrasena) Return ChildUsuario objects filtered by the contrasena column
+ * @method     ChildUsuario[]|ObjectCollection findByTimestamp(string $timestamp) Return ChildUsuario objects filtered by the timestamp column
  * @method     ChildUsuario[]|ObjectCollection findByValid(int $valid) Return ChildUsuario objects filtered by the valid column
  * @method     ChildUsuario[]|\Propel\Runtime\Util\PropelModelPager paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
  *
@@ -79,13 +94,13 @@ abstract class UsuarioQuery extends ModelCriteria
     protected $entityNotFoundExceptionClass = '\\Propel\\Runtime\\Exception\\EntityNotFoundException';
 
     /**
-     * Initializes internal state of \PropelORMAPI\DAOS\Base\UsuarioQuery object.
+     * Initializes internal state of \PropelORMAPI\ORM\Base\UsuarioQuery object.
      *
      * @param     string $dbName The database name
      * @param     string $modelName The phpName of a model, e.g. 'Book'
      * @param     string $modelAlias The alias for the model in this query, e.g. 'b'
      */
-    public function __construct($dbName = 'tareaconnection', $modelName = '\\PropelORMAPI\\DAOS\\Usuario', $modelAlias = null)
+    public function __construct($dbName = 'tareaconnection', $modelName = '\\PropelORMAPI\\ORM\\Usuario', $modelAlias = null)
     {
         parent::__construct($dbName, $modelName, $modelAlias);
     }
@@ -169,7 +184,7 @@ abstract class UsuarioQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT idusuario, nombre, apellido, valid FROM usuario WHERE idusuario = :p0';
+        $sql = 'SELECT idusuario, nombre, apellido, usuario, contrasena, timestamp, valid FROM usuario WHERE idusuario = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -351,6 +366,99 @@ abstract class UsuarioQuery extends ModelCriteria
     }
 
     /**
+     * Filter the query on the usuario column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByUsuario('fooValue');   // WHERE usuario = 'fooValue'
+     * $query->filterByUsuario('%fooValue%', Criteria::LIKE); // WHERE usuario LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $usuario The value to use as filter.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildUsuarioQuery The current query, for fluid interface
+     */
+    public function filterByUsuario($usuario = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($usuario)) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(UsuarioTableMap::COL_USUARIO, $usuario, $comparison);
+    }
+
+    /**
+     * Filter the query on the contrasena column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByContrasena('fooValue');   // WHERE contrasena = 'fooValue'
+     * $query->filterByContrasena('%fooValue%', Criteria::LIKE); // WHERE contrasena LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $contrasena The value to use as filter.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildUsuarioQuery The current query, for fluid interface
+     */
+    public function filterByContrasena($contrasena = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($contrasena)) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(UsuarioTableMap::COL_CONTRASENA, $contrasena, $comparison);
+    }
+
+    /**
+     * Filter the query on the timestamp column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByTimestamp('2011-03-14'); // WHERE timestamp = '2011-03-14'
+     * $query->filterByTimestamp('now'); // WHERE timestamp = '2011-03-14'
+     * $query->filterByTimestamp(array('max' => 'yesterday')); // WHERE timestamp > '2011-03-13'
+     * </code>
+     *
+     * @param     mixed $timestamp The value to use as filter.
+     *              Values can be integers (unix timestamps), DateTime objects, or strings.
+     *              Empty strings are treated as NULL.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildUsuarioQuery The current query, for fluid interface
+     */
+    public function filterByTimestamp($timestamp = null, $comparison = null)
+    {
+        if (is_array($timestamp)) {
+            $useMinMax = false;
+            if (isset($timestamp['min'])) {
+                $this->addUsingAlias(UsuarioTableMap::COL_TIMESTAMP, $timestamp['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($timestamp['max'])) {
+                $this->addUsingAlias(UsuarioTableMap::COL_TIMESTAMP, $timestamp['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(UsuarioTableMap::COL_TIMESTAMP, $timestamp, $comparison);
+    }
+
+    /**
      * Filter the query on the valid column
      *
      * Example usage:
@@ -392,16 +500,16 @@ abstract class UsuarioQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query by a related \PropelORMAPI\DAOS\Usuariotarea object
+     * Filter the query by a related \PropelORMAPI\ORM\Usuariotarea object
      *
-     * @param \PropelORMAPI\DAOS\Usuariotarea|ObjectCollection $usuariotarea the related object to use as filter
+     * @param \PropelORMAPI\ORM\Usuariotarea|ObjectCollection $usuariotarea the related object to use as filter
      * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return ChildUsuarioQuery The current query, for fluid interface
      */
     public function filterByUsuariotarea($usuariotarea, $comparison = null)
     {
-        if ($usuariotarea instanceof \PropelORMAPI\DAOS\Usuariotarea) {
+        if ($usuariotarea instanceof \PropelORMAPI\ORM\Usuariotarea) {
             return $this
                 ->addUsingAlias(UsuarioTableMap::COL_IDUSUARIO, $usuariotarea->getIdusuario(), $comparison);
         } elseif ($usuariotarea instanceof ObjectCollection) {
@@ -410,7 +518,7 @@ abstract class UsuarioQuery extends ModelCriteria
                 ->filterByPrimaryKeys($usuariotarea->getPrimaryKeys())
                 ->endUse();
         } else {
-            throw new PropelException('filterByUsuariotarea() only accepts arguments of type \PropelORMAPI\DAOS\Usuariotarea or Collection');
+            throw new PropelException('filterByUsuariotarea() only accepts arguments of type \PropelORMAPI\ORM\Usuariotarea or Collection');
         }
     }
 
@@ -455,13 +563,13 @@ abstract class UsuarioQuery extends ModelCriteria
      *                                   to be used as main alias in the secondary query
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return \PropelORMAPI\DAOS\UsuariotareaQuery A secondary query class using the current class as primary query
+     * @return \PropelORMAPI\ORM\UsuariotareaQuery A secondary query class using the current class as primary query
      */
     public function useUsuariotareaQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
             ->joinUsuariotarea($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'Usuariotarea', '\PropelORMAPI\DAOS\UsuariotareaQuery');
+            ->useQuery($relationAlias ? $relationAlias : 'Usuariotarea', '\PropelORMAPI\ORM\UsuariotareaQuery');
     }
 
     /**

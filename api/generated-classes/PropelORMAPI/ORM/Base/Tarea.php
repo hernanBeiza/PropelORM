@@ -1,18 +1,18 @@
 <?php
 
-namespace PropelORMAPI\DAOS\Base;
+namespace PropelORMAPI\ORM\Base;
 
 use \DateTime;
 use \Exception;
 use \PDO;
-use PropelORMAPI\DAOS\Tarea as ChildTarea;
-use PropelORMAPI\DAOS\TareaQuery as ChildTareaQuery;
-use PropelORMAPI\DAOS\Usuario as ChildUsuario;
-use PropelORMAPI\DAOS\UsuarioQuery as ChildUsuarioQuery;
-use PropelORMAPI\DAOS\Usuariotarea as ChildUsuariotarea;
-use PropelORMAPI\DAOS\UsuariotareaQuery as ChildUsuariotareaQuery;
-use PropelORMAPI\DAOS\Map\TareaTableMap;
-use PropelORMAPI\DAOS\Map\UsuariotareaTableMap;
+use PropelORMAPI\ORM\Tarea as ChildTarea;
+use PropelORMAPI\ORM\TareaQuery as ChildTareaQuery;
+use PropelORMAPI\ORM\Usuario as ChildUsuario;
+use PropelORMAPI\ORM\UsuarioQuery as ChildUsuarioQuery;
+use PropelORMAPI\ORM\Usuariotarea as ChildUsuariotarea;
+use PropelORMAPI\ORM\UsuariotareaQuery as ChildUsuariotareaQuery;
+use PropelORMAPI\ORM\Map\TareaTableMap;
+use PropelORMAPI\ORM\Map\UsuariotareaTableMap;
 use Propel\Runtime\Propel;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
@@ -33,14 +33,14 @@ use Propel\Runtime\Util\PropelDateTime;
  *
  *
  *
- * @package    propel.generator.PropelORMAPI.DAOS.Base
+ * @package    propel.generator.PropelORMAPI.ORM.Base
  */
 abstract class Tarea implements ActiveRecordInterface
 {
     /**
      * TableMap class name
      */
-    const TABLE_MAP = '\\PropelORMAPI\\DAOS\\Map\\TareaTableMap';
+    const TABLE_MAP = '\\PropelORMAPI\\ORM\\Map\\TareaTableMap';
 
 
     /**
@@ -158,7 +158,7 @@ abstract class Tarea implements ActiveRecordInterface
     }
 
     /**
-     * Initializes internal state of PropelORMAPI\DAOS\Base\Tarea object.
+     * Initializes internal state of PropelORMAPI\ORM\Base\Tarea object.
      * @see applyDefaults()
      */
     public function __construct()
@@ -438,7 +438,7 @@ abstract class Tarea implements ActiveRecordInterface
      * Set the value of [idtarea] column.
      *
      * @param int $v new value
-     * @return $this|\PropelORMAPI\DAOS\Tarea The current object (for fluent API support)
+     * @return $this|\PropelORMAPI\ORM\Tarea The current object (for fluent API support)
      */
     public function setIdtarea($v)
     {
@@ -458,7 +458,7 @@ abstract class Tarea implements ActiveRecordInterface
      * Set the value of [titulo] column.
      *
      * @param string $v new value
-     * @return $this|\PropelORMAPI\DAOS\Tarea The current object (for fluent API support)
+     * @return $this|\PropelORMAPI\ORM\Tarea The current object (for fluent API support)
      */
     public function setTitulo($v)
     {
@@ -479,7 +479,7 @@ abstract class Tarea implements ActiveRecordInterface
      *
      * @param  mixed $v string, integer (timestamp), or \DateTimeInterface value.
      *               Empty strings are treated as NULL.
-     * @return $this|\PropelORMAPI\DAOS\Tarea The current object (for fluent API support)
+     * @return $this|\PropelORMAPI\ORM\Tarea The current object (for fluent API support)
      */
     public function setTimestamp($v)
     {
@@ -498,7 +498,7 @@ abstract class Tarea implements ActiveRecordInterface
      * Set the value of [valid] column.
      *
      * @param int $v new value
-     * @return $this|\PropelORMAPI\DAOS\Tarea The current object (for fluent API support)
+     * @return $this|\PropelORMAPI\ORM\Tarea The current object (for fluent API support)
      */
     public function setValid($v)
     {
@@ -583,7 +583,7 @@ abstract class Tarea implements ActiveRecordInterface
             return $startcol + 4; // 4 = TareaTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
-            throw new PropelException(sprintf('Error populating %s object', '\\PropelORMAPI\\DAOS\\Tarea'), 0, $e);
+            throw new PropelException(sprintf('Error populating %s object', '\\PropelORMAPI\\ORM\\Tarea'), 0, $e);
         }
     }
 
@@ -772,7 +772,7 @@ abstract class Tarea implements ActiveRecordInterface
                         $pks[] = $entryPk;
                     }
 
-                    \PropelORMAPI\DAOS\UsuariotareaQuery::create()
+                    \PropelORMAPI\ORM\UsuariotareaQuery::create()
                         ->filterByPrimaryKeys($pks)
                         ->delete($con);
 
@@ -796,7 +796,7 @@ abstract class Tarea implements ActiveRecordInterface
 
             if ($this->usuariotareasScheduledForDeletion !== null) {
                 if (!$this->usuariotareasScheduledForDeletion->isEmpty()) {
-                    \PropelORMAPI\DAOS\UsuariotareaQuery::create()
+                    \PropelORMAPI\ORM\UsuariotareaQuery::create()
                         ->filterByPrimaryKeys($this->usuariotareasScheduledForDeletion->getPrimaryKeys(false))
                         ->delete($con);
                     $this->usuariotareasScheduledForDeletion = null;
@@ -1020,7 +1020,7 @@ abstract class Tarea implements ActiveRecordInterface
      *                one of the class type constants TableMap::TYPE_PHPNAME, TableMap::TYPE_CAMELNAME
      *                TableMap::TYPE_COLNAME, TableMap::TYPE_FIELDNAME, TableMap::TYPE_NUM.
      *                Defaults to TableMap::TYPE_PHPNAME.
-     * @return $this|\PropelORMAPI\DAOS\Tarea
+     * @return $this|\PropelORMAPI\ORM\Tarea
      */
     public function setByName($name, $value, $type = TableMap::TYPE_PHPNAME)
     {
@@ -1035,7 +1035,7 @@ abstract class Tarea implements ActiveRecordInterface
      *
      * @param  int $pos position in xml schema
      * @param  mixed $value field value
-     * @return $this|\PropelORMAPI\DAOS\Tarea
+     * @return $this|\PropelORMAPI\ORM\Tarea
      */
     public function setByPosition($pos, $value)
     {
@@ -1109,7 +1109,7 @@ abstract class Tarea implements ActiveRecordInterface
      * @param string $data The source data to import from
      * @param string $keyType The type of keys the array uses.
      *
-     * @return $this|\PropelORMAPI\DAOS\Tarea The current object, for fluid interface
+     * @return $this|\PropelORMAPI\ORM\Tarea The current object, for fluid interface
      */
     public function importFrom($parser, $data, $keyType = TableMap::TYPE_PHPNAME)
     {
@@ -1222,7 +1222,7 @@ abstract class Tarea implements ActiveRecordInterface
      * If desired, this method can also make copies of all associated (fkey referrers)
      * objects.
      *
-     * @param      object $copyObj An object of \PropelORMAPI\DAOS\Tarea (or compatible) type.
+     * @param      object $copyObj An object of \PropelORMAPI\ORM\Tarea (or compatible) type.
      * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
      * @param      boolean $makeNew Whether to reset autoincrement PKs and make the object new.
      * @throws PropelException
@@ -1261,7 +1261,7 @@ abstract class Tarea implements ActiveRecordInterface
      * objects.
      *
      * @param  boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-     * @return \PropelORMAPI\DAOS\Tarea Clone of current object.
+     * @return \PropelORMAPI\ORM\Tarea Clone of current object.
      * @throws PropelException
      */
     public function copy($deepCopy = false)
@@ -1334,7 +1334,7 @@ abstract class Tarea implements ActiveRecordInterface
         $collectionClassName = UsuariotareaTableMap::getTableMap()->getCollectionClassName();
 
         $this->collUsuariotareas = new $collectionClassName;
-        $this->collUsuariotareas->setModel('\PropelORMAPI\DAOS\Usuariotarea');
+        $this->collUsuariotareas->setModel('\PropelORMAPI\ORM\Usuariotarea');
     }
 
     /**
@@ -1470,7 +1470,7 @@ abstract class Tarea implements ActiveRecordInterface
      * through the ChildUsuariotarea foreign key attribute.
      *
      * @param  ChildUsuariotarea $l ChildUsuariotarea
-     * @return $this|\PropelORMAPI\DAOS\Tarea The current object (for fluent API support)
+     * @return $this|\PropelORMAPI\ORM\Tarea The current object (for fluent API support)
      */
     public function addUsuariotarea(ChildUsuariotarea $l)
     {

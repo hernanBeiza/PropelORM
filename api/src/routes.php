@@ -31,15 +31,15 @@ $app->get('/', \IndexController::class . ':saludar');
 $app->post('/usuario', \UsuarioController::class . ':guardar');
 $app->put('/usuario/{idusuario}', \UsuarioController::class . ':editar');
 $app->delete('/usuario/{idusuario}', \UsuarioController::class . ':eliminar');
-$app->get('/usuario/pagina/{pag}', \UsuarioController::class . ':obtener');
 $app->get('/usuario/{idusuario}', \UsuarioController::class . ':obtenerConID');
+$app->get('/usuario/pagina/{pag}', \UsuarioController::class . ':obtener');
 $app->get('/usuario/nombre/{nombre}', \UsuarioController::class . ':obtenerConNombre');
 //Tarea
 $app->post('/tarea', \TareaController::class . ':guardar');
 $app->put('/tarea/{idtarea}', \TareaController::class . ':editar');
 $app->delete('/tarea/{idtarea}', \TareaController::class . ':eliminar');
+$app->get('/tarea/{idtarea}', \TareaController::class . ':obtenerConID');
 $app->get('/tarea/pagina/{pag}', \TareaController::class . ':obtener');
-$app->get('/tarea/detalle/{idtarea}', \TareaController::class . ':obtenerConID');
 $app->get('/tarea/usuario/{idusuario}', \TareaController::class . ':obtenerConIDUsuario');
 
 //http://docs.slimframework.com/request/body/slim-3-how-to-get-all-get-put-post-variables

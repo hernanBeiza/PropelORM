@@ -13,7 +13,7 @@ $app->add(new \Slim\Middleware\JwtAuthentication([
     "ignore" => ["/usuario"],
     "secret" => getenv("SECRET_KEY"),
     "algorithm" => $container["settings"]["codification"],
-	"attribute" => "jwt",
+		"attribute" => "jwt",
     "secure" => false,
     "callback" => function ($request, $response, $arguments) use ($container) {
 		error_log("middleware callback");

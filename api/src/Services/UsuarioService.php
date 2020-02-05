@@ -20,126 +20,43 @@ class UsuarioService
 
 	public function guardar($usuarioVO)
 	{
-    $this->logger->info(__CLASS__.":".__FUNCTION__."();");		
-		$usuario = new Usuario();
-		$usuario->setNombre($usuarioVO->getNombre());
-		$usuario->setApellido($usuarioVO->getApellido());
-		$usuario->save();
-		if($usuario!=null){
-			$respuesta = array("result"=>true,"usuario"=>null,"mensajes"=>"Usuario creado correctamente");
-			$respuesta["usuario"] = UsuarioVO::withUsuario($usuario)->jsonSerialize();
-		} else {
-			$respuesta = array("result"=>false,"usuario"=>null,"errores"=>"El usuario no se ha creado");
-		}
+    //$this->logger->info(__CLASS__.":".__FUNCTION__."();");		
+		$respuesta = $this->c->UsuarioDAO->guardar($usuarioVO);
     return $respuesta;
 	}
 	
 	public function editar($usuarioVO)
 	{
-    $this->logger->info(__CLASS__.":".__FUNCTION__."();");
-		$usuario = UsuarioQuery::create()->findPK($usuarioVO->getIdUsuario());
-		$usuario->setNombre($usuarioVO->getNombre());
-		$usuario->setApellido($usuarioVO->getApellido());
-		$usuario->save();
-		if($usuario!=null){
-			$respuesta = array("result"=>true,"usuario"=>null,"mensajes"=>"Usuario editado correctamente");
-			$respuesta["usuario"] = UsuarioVO::withUsuario($usuario)->jsonSerialize();
-		} else {
-			$respuesta = array("result"=>false,"usuario"=>null,"errores"=>"El usuario no se ha editado");
-		}
+    //$this->logger->info(__CLASS__.":".__FUNCTION__."();");		
+		$respuesta = $this->c->UsuarioDAO->editar($usuarioVO);    
     return $respuesta;
 	}
 	
 	public function eliminar($usuarioVO)
 	{
-    $this->logger->info(__CLASS__.":".__FUNCTION__."();");		
-		$usuario = UsuarioQuery::create()->findPK($usuarioVO->getIdUsuario());
-		if($usuario){
-			$this->logger->info(__CLASS__.":".__FUNCTION__."(); ".$usuario->toJSON());		
-			$usuario->delete();
-			if($usuario->isDeleted()){
-				$respuesta = array("result"=>true,"mensajes"=>"Usuario eliminado correctamente");
-			} else {
-				$respuesta = array("result"=>false,"errores"=>"El usuario no se ha eliminado");
-			}
-		} else {			
-				$respuesta = array("result"=>false,"errores"=>"No existe usuario con ese id");
-		}
+    //$this->logger->info(__CLASS__.":".__FUNCTION__."();");		
+		$respuesta = $this->c->UsuarioDAO->eliminar($usuarioVO);
     return $respuesta;
 	}
 
 	public function obtener($pag)
 	{
-		//Ejemplos de log
-		/*
-		use PropelORMAPI\DAOS\Map\UsuarioTableMap;
-		\Propel\Runtime\Propel::getConnection()->useDebug(true);
-		$con = \Propel\Runtime\Propel::getWriteConnection(UsuarioTableMap::DATABASE_NAME);
-		$con->useDebug(true);
-		*/
-
-		\Propel\Runtime\Propel::log('uh-oh, something went wrong with ', \Monolog\Logger::ERROR);
-		\Propel\Runtime\Propel::log('uh-oh, something went wrong with ', \Monolog\Logger::WARNING);
-
-    $resultadosPorPagina = 2;
-		$usuarios = UsuarioQuery::create()->limit($resultadosPorPagina)->offset($resultadosPorPagina*$pag)->find();
-
-		if(count($usuarios)>0){
-			//TODO Mejorar
-			//Pasar la colleción de propel a un arreglo para poder usarlo en array_map 
-			$items = array();
-			foreach ($usuarios as $item) {
-				array_push($items,$item);
-			}
-			$respuesta = array('result'=>true,'usuarios'=>$items, 'mensajes'=>"Usuarios encontrados");
-
-			$respuesta["usuarios"] = array_map(function($usuario){
-				return UsuarioVO::withUsuario($usuario)->jsonSerialize();
-			},$respuesta["usuarios"]);
-
-		} else {
-			$respuesta = array('result'=>false,'usuarios'=>null, 'errores'=>"No se han encontrado usuario");
-		}
-
+    //$this->logger->info(__CLASS__.":".__FUNCTION__."();");
+		$respuesta = $this->c->UsuarioDAO->obtener($pag);
     return $respuesta;
 	}
 
 	public function obtenerConID($idUsuario)
 	{
-    $this->logger->info(__CLASS__.":".__FUNCTION__."();");		
-		$usuario = UsuarioQuery::create()->findPK($idUsuario);
-		if($usuario){
-			$respuesta = array('result'=>true,'usuario'=>null, 'mensajes'=>"Usuario encontrado");
-			$respuesta["usuario"] = UsuarioVO::withUsuario($usuario)->jsonSerialize();
-		} else {
-			$respuesta = array('result'=>false,'usuario'=>null, 'mensajes'=>"Usuario no encontrado");
-		}
+    //$this->logger->info(__CLASS__.":".__FUNCTION__."();");		
+		$respuesta = $this->c->UsuarioDAO->obtenerConID($idUsuario);
     return $respuesta;
 	}
 
 	public function obtenerConNombre($nombre)
 	{
-    $this->logger->info(__CLASS__.":".__FUNCTION__."();");
-		$usuarios = UsuarioQuery::create()->filterByNombre($nombre)->find();
-
-		if(count($usuarios)>0){
-			//TODO Mejorar
-			//Pasar la colleción de propel a un arreglo para poder usarlo en array_map 
-			$items = array();
-			foreach ($usuarios as $item) {
-				array_push($items,$item);
-			}
-			$respuesta = array('result'=>true,'usuarios'=>$items, 'mensajes'=>"Usuarios encontrados");
-			
-			$respuesta["usuarios"] = array_map(function($usuario){
-	    $this->logger->info(__CLASS__.":".__FUNCTION__."(); ".$usuario);		
-				return UsuarioVO::withUsuario($usuario)->jsonSerialize();
-			},$respuesta["usuarios"]);
-
-		} else {
-			$respuesta = array('result'=>false,'usuarios'=>null, 'errores'=>"No se han encontrado usuarios");
-		}
-
+    //$this->logger->info(__CLASS__.":".__FUNCTION__."();");		
+		$respuesta = $this->c->UsuarioDAO->obtenerConNombre($nombre);
     return $respuesta;
 	}
 

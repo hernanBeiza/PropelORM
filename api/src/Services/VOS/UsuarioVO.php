@@ -9,6 +9,9 @@ class UsuarioVO implements JsonSerializable
   private $idusuario;
   private $nombre;
   private $apellido;
+  private $usuario;
+  private $contrasena;
+  private $timestamp;
   private $valid;
 
   private $tareasVO;
@@ -28,7 +31,6 @@ class UsuarioVO implements JsonSerializable
   	array_push($this->tareasVO, $tareaVO);
   }
 
-
   // Construir VO a partir de un Model
   public static function withUsuario($usuario) {
     $instance = new self();
@@ -36,6 +38,8 @@ class UsuarioVO implements JsonSerializable
 	    $instance->setIdUsuario($usuario->getIdUsuario());
 	    $instance->setNombre($usuario->getNombre());
 	    $instance->setApellido($usuario->getApellido());
+	    $instance->setUsuario($usuario->getUsuario());
+	    $instance->setTimestamp($usuario->getTimestamp());
 	    $instance->setValid($usuario->getValid());
   	}
     return $instance;
@@ -101,6 +105,66 @@ class UsuarioVO implements JsonSerializable
   public function setApellido($apellido)
   {
       $this->apellido = $apellido;
+
+      return $this;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getUsuario()
+  {
+      return $this->usuario;
+  }
+
+  /**
+   * @param mixed $usuario
+   *
+   * @return self
+   */
+  public function setUsuario($usuario)
+  {
+      $this->usuario = $usuario;
+
+      return $this;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getContrasena()
+  {
+      return $this->contrasena;
+  }
+
+  /**
+   * @param mixed $contrasena
+   *
+   * @return self
+   */
+  public function setContrasena($contrasena)
+  {
+      $this->contrasena = $contrasena;
+
+      return $this;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getTimestamp()
+  {
+      return $this->timestamp;
+  }
+
+  /**
+   * @param mixed $timestamp
+   *
+   * @return self
+   */
+  public function setTimestamp($timestamp)
+  {
+      $this->timestamp = $timestamp;
 
       return $this;
   }

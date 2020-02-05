@@ -1,9 +1,9 @@
 <?php
 
-namespace PropelORMAPI\DAOS\Map;
+namespace PropelORMAPI\ORM\Map;
 
-use PropelORMAPI\DAOS\Tarea;
-use PropelORMAPI\DAOS\TareaQuery;
+use PropelORMAPI\ORM\Tarea;
+use PropelORMAPI\ORM\TareaQuery;
 use Propel\Runtime\Propel;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\InstancePoolTrait;
@@ -34,7 +34,7 @@ class TareaTableMap extends TableMap
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'PropelORMAPI.DAOS.Map.TareaTableMap';
+    const CLASS_NAME = 'PropelORMAPI.ORM.Map.TareaTableMap';
 
     /**
      * The default database name for this class
@@ -49,12 +49,12 @@ class TareaTableMap extends TableMap
     /**
      * The related Propel class for this table
      */
-    const OM_CLASS = '\\PropelORMAPI\\DAOS\\Tarea';
+    const OM_CLASS = '\\PropelORMAPI\\ORM\\Tarea';
 
     /**
      * A class that can be returned by this tableMap
      */
-    const CLASS_DEFAULT = 'PropelORMAPI.DAOS.Tarea';
+    const CLASS_DEFAULT = 'PropelORMAPI.ORM.Tarea';
 
     /**
      * The total number of columns
@@ -137,8 +137,8 @@ class TareaTableMap extends TableMap
         $this->setName('tarea');
         $this->setPhpName('Tarea');
         $this->setIdentifierQuoting(false);
-        $this->setClassName('\\PropelORMAPI\\DAOS\\Tarea');
-        $this->setPackage('PropelORMAPI.DAOS');
+        $this->setClassName('\\PropelORMAPI\\ORM\\Tarea');
+        $this->setPackage('PropelORMAPI.ORM');
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('idtarea', 'Idtarea', 'INTEGER', true, null, null);
@@ -152,14 +152,14 @@ class TareaTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('Usuariotarea', '\\PropelORMAPI\\DAOS\\Usuariotarea', RelationMap::ONE_TO_MANY, array (
+        $this->addRelation('Usuariotarea', '\\PropelORMAPI\\ORM\\Usuariotarea', RelationMap::ONE_TO_MANY, array (
   0 =>
   array (
     0 => ':idtarea',
     1 => ':idtarea',
   ),
 ), null, null, 'Usuariotareas', false);
-        $this->addRelation('Usuario', '\\PropelORMAPI\\DAOS\\Usuario', RelationMap::MANY_TO_MANY, array(), null, null, 'Usuarios');
+        $this->addRelation('Usuario', '\\PropelORMAPI\\ORM\\Usuario', RelationMap::MANY_TO_MANY, array(), null, null, 'Usuarios');
     } // buildRelations()
 
     /**
@@ -358,7 +358,7 @@ class TareaTableMap extends TableMap
         if ($values instanceof Criteria) {
             // rename for clarity
             $criteria = $values;
-        } elseif ($values instanceof \PropelORMAPI\DAOS\Tarea) { // it's a model object
+        } elseif ($values instanceof \PropelORMAPI\ORM\Tarea) { // it's a model object
             // create criteria based on pk values
             $criteria = $values->buildPkeyCriteria();
         } else { // it's a primary key, or an array of pks

@@ -1,17 +1,18 @@
 <?php
 
-namespace PropelORMAPI\DAOS\Base;
+namespace PropelORMAPI\ORM\Base;
 
+use \DateTime;
 use \Exception;
 use \PDO;
-use PropelORMAPI\DAOS\Tarea as ChildTarea;
-use PropelORMAPI\DAOS\TareaQuery as ChildTareaQuery;
-use PropelORMAPI\DAOS\Usuario as ChildUsuario;
-use PropelORMAPI\DAOS\UsuarioQuery as ChildUsuarioQuery;
-use PropelORMAPI\DAOS\Usuariotarea as ChildUsuariotarea;
-use PropelORMAPI\DAOS\UsuariotareaQuery as ChildUsuariotareaQuery;
-use PropelORMAPI\DAOS\Map\UsuarioTableMap;
-use PropelORMAPI\DAOS\Map\UsuariotareaTableMap;
+use PropelORMAPI\ORM\Tarea as ChildTarea;
+use PropelORMAPI\ORM\TareaQuery as ChildTareaQuery;
+use PropelORMAPI\ORM\Usuario as ChildUsuario;
+use PropelORMAPI\ORM\UsuarioQuery as ChildUsuarioQuery;
+use PropelORMAPI\ORM\Usuariotarea as ChildUsuariotarea;
+use PropelORMAPI\ORM\UsuariotareaQuery as ChildUsuariotareaQuery;
+use PropelORMAPI\ORM\Map\UsuarioTableMap;
+use PropelORMAPI\ORM\Map\UsuariotareaTableMap;
 use Propel\Runtime\Propel;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
@@ -25,20 +26,21 @@ use Propel\Runtime\Exception\LogicException;
 use Propel\Runtime\Exception\PropelException;
 use Propel\Runtime\Map\TableMap;
 use Propel\Runtime\Parser\AbstractParser;
+use Propel\Runtime\Util\PropelDateTime;
 
 /**
  * Base class that represents a row from the 'usuario' table.
  *
  *
  *
- * @package    propel.generator.PropelORMAPI.DAOS.Base
+ * @package    propel.generator.PropelORMAPI.ORM.Base
  */
 abstract class Usuario implements ActiveRecordInterface
 {
     /**
      * TableMap class name
      */
-    const TABLE_MAP = '\\PropelORMAPI\\DAOS\\Map\\UsuarioTableMap';
+    const TABLE_MAP = '\\PropelORMAPI\\ORM\\Map\\UsuarioTableMap';
 
 
     /**
@@ -87,6 +89,28 @@ abstract class Usuario implements ActiveRecordInterface
      * @var        string
      */
     protected $apellido;
+
+    /**
+     * The value for the usuario field.
+     *
+     * @var        string
+     */
+    protected $usuario;
+
+    /**
+     * The value for the contrasena field.
+     *
+     * @var        string
+     */
+    protected $contrasena;
+
+    /**
+     * The value for the timestamp field.
+     *
+     * Note: this column has a database default value of: (expression) CURRENT_TIMESTAMP
+     * @var        DateTime
+     */
+    protected $timestamp;
 
     /**
      * The value for the valid field.
@@ -153,7 +177,7 @@ abstract class Usuario implements ActiveRecordInterface
     }
 
     /**
-     * Initializes internal state of PropelORMAPI\DAOS\Base\Usuario object.
+     * Initializes internal state of PropelORMAPI\ORM\Base\Usuario object.
      * @see applyDefaults()
      */
     public function __construct()
@@ -410,6 +434,46 @@ abstract class Usuario implements ActiveRecordInterface
     }
 
     /**
+     * Get the [usuario] column value.
+     *
+     * @return string
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    /**
+     * Get the [contrasena] column value.
+     *
+     * @return string
+     */
+    public function getContrasena()
+    {
+        return $this->contrasena;
+    }
+
+    /**
+     * Get the [optionally formatted] temporal [timestamp] column value.
+     *
+     *
+     * @param      string|null $format The date/time format string (either date()-style or strftime()-style).
+     *                            If format is NULL, then the raw DateTime object will be returned.
+     *
+     * @return string|DateTime Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
+     *
+     * @throws PropelException - if unable to parse/validate the date/time value.
+     */
+    public function getTimestamp($format = NULL)
+    {
+        if ($format === null) {
+            return $this->timestamp;
+        } else {
+            return $this->timestamp instanceof \DateTimeInterface ? $this->timestamp->format($format) : null;
+        }
+    }
+
+    /**
      * Get the [valid] column value.
      *
      * @return int
@@ -423,7 +487,7 @@ abstract class Usuario implements ActiveRecordInterface
      * Set the value of [idusuario] column.
      *
      * @param int $v new value
-     * @return $this|\PropelORMAPI\DAOS\Usuario The current object (for fluent API support)
+     * @return $this|\PropelORMAPI\ORM\Usuario The current object (for fluent API support)
      */
     public function setIdusuario($v)
     {
@@ -443,7 +507,7 @@ abstract class Usuario implements ActiveRecordInterface
      * Set the value of [nombre] column.
      *
      * @param string $v new value
-     * @return $this|\PropelORMAPI\DAOS\Usuario The current object (for fluent API support)
+     * @return $this|\PropelORMAPI\ORM\Usuario The current object (for fluent API support)
      */
     public function setNombre($v)
     {
@@ -463,7 +527,7 @@ abstract class Usuario implements ActiveRecordInterface
      * Set the value of [apellido] column.
      *
      * @param string $v new value
-     * @return $this|\PropelORMAPI\DAOS\Usuario The current object (for fluent API support)
+     * @return $this|\PropelORMAPI\ORM\Usuario The current object (for fluent API support)
      */
     public function setApellido($v)
     {
@@ -480,10 +544,70 @@ abstract class Usuario implements ActiveRecordInterface
     } // setApellido()
 
     /**
+     * Set the value of [usuario] column.
+     *
+     * @param string $v new value
+     * @return $this|\PropelORMAPI\ORM\Usuario The current object (for fluent API support)
+     */
+    public function setUsuario($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->usuario !== $v) {
+            $this->usuario = $v;
+            $this->modifiedColumns[UsuarioTableMap::COL_USUARIO] = true;
+        }
+
+        return $this;
+    } // setUsuario()
+
+    /**
+     * Set the value of [contrasena] column.
+     *
+     * @param string $v new value
+     * @return $this|\PropelORMAPI\ORM\Usuario The current object (for fluent API support)
+     */
+    public function setContrasena($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->contrasena !== $v) {
+            $this->contrasena = $v;
+            $this->modifiedColumns[UsuarioTableMap::COL_CONTRASENA] = true;
+        }
+
+        return $this;
+    } // setContrasena()
+
+    /**
+     * Sets the value of [timestamp] column to a normalized version of the date/time value specified.
+     *
+     * @param  mixed $v string, integer (timestamp), or \DateTimeInterface value.
+     *               Empty strings are treated as NULL.
+     * @return $this|\PropelORMAPI\ORM\Usuario The current object (for fluent API support)
+     */
+    public function setTimestamp($v)
+    {
+        $dt = PropelDateTime::newInstance($v, null, 'DateTime');
+        if ($this->timestamp !== null || $dt !== null) {
+            if ($this->timestamp === null || $dt === null || $dt->format("Y-m-d H:i:s.u") !== $this->timestamp->format("Y-m-d H:i:s.u")) {
+                $this->timestamp = $dt === null ? null : clone $dt;
+                $this->modifiedColumns[UsuarioTableMap::COL_TIMESTAMP] = true;
+            }
+        } // if either are not null
+
+        return $this;
+    } // setTimestamp()
+
+    /**
      * Set the value of [valid] column.
      *
      * @param int $v new value
-     * @return $this|\PropelORMAPI\DAOS\Usuario The current object (for fluent API support)
+     * @return $this|\PropelORMAPI\ORM\Usuario The current object (for fluent API support)
      */
     public function setValid($v)
     {
@@ -548,7 +672,19 @@ abstract class Usuario implements ActiveRecordInterface
             $col = $row[TableMap::TYPE_NUM == $indexType ? 2 + $startcol : UsuarioTableMap::translateFieldName('Apellido', TableMap::TYPE_PHPNAME, $indexType)];
             $this->apellido = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : UsuarioTableMap::translateFieldName('Valid', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : UsuarioTableMap::translateFieldName('Usuario', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->usuario = (null !== $col) ? (string) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : UsuarioTableMap::translateFieldName('Contrasena', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->contrasena = (null !== $col) ? (string) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : UsuarioTableMap::translateFieldName('Timestamp', TableMap::TYPE_PHPNAME, $indexType)];
+            if ($col === '0000-00-00 00:00:00') {
+                $col = null;
+            }
+            $this->timestamp = (null !== $col) ? PropelDateTime::newInstance($col, null, 'DateTime') : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : UsuarioTableMap::translateFieldName('Valid', TableMap::TYPE_PHPNAME, $indexType)];
             $this->valid = (null !== $col) ? (int) $col : null;
             $this->resetModified();
 
@@ -558,10 +694,10 @@ abstract class Usuario implements ActiveRecordInterface
                 $this->ensureConsistency();
             }
 
-            return $startcol + 4; // 4 = UsuarioTableMap::NUM_HYDRATE_COLUMNS.
+            return $startcol + 7; // 7 = UsuarioTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
-            throw new PropelException(sprintf('Error populating %s object', '\\PropelORMAPI\\DAOS\\Usuario'), 0, $e);
+            throw new PropelException(sprintf('Error populating %s object', '\\PropelORMAPI\\ORM\\Usuario'), 0, $e);
         }
     }
 
@@ -750,7 +886,7 @@ abstract class Usuario implements ActiveRecordInterface
                         $pks[] = $entryPk;
                     }
 
-                    \PropelORMAPI\DAOS\UsuariotareaQuery::create()
+                    \PropelORMAPI\ORM\UsuariotareaQuery::create()
                         ->filterByPrimaryKeys($pks)
                         ->delete($con);
 
@@ -774,7 +910,7 @@ abstract class Usuario implements ActiveRecordInterface
 
             if ($this->usuariotareasScheduledForDeletion !== null) {
                 if (!$this->usuariotareasScheduledForDeletion->isEmpty()) {
-                    \PropelORMAPI\DAOS\UsuariotareaQuery::create()
+                    \PropelORMAPI\ORM\UsuariotareaQuery::create()
                         ->filterByPrimaryKeys($this->usuariotareasScheduledForDeletion->getPrimaryKeys(false))
                         ->delete($con);
                     $this->usuariotareasScheduledForDeletion = null;
@@ -824,6 +960,15 @@ abstract class Usuario implements ActiveRecordInterface
         if ($this->isColumnModified(UsuarioTableMap::COL_APELLIDO)) {
             $modifiedColumns[':p' . $index++]  = 'apellido';
         }
+        if ($this->isColumnModified(UsuarioTableMap::COL_USUARIO)) {
+            $modifiedColumns[':p' . $index++]  = 'usuario';
+        }
+        if ($this->isColumnModified(UsuarioTableMap::COL_CONTRASENA)) {
+            $modifiedColumns[':p' . $index++]  = 'contrasena';
+        }
+        if ($this->isColumnModified(UsuarioTableMap::COL_TIMESTAMP)) {
+            $modifiedColumns[':p' . $index++]  = 'timestamp';
+        }
         if ($this->isColumnModified(UsuarioTableMap::COL_VALID)) {
             $modifiedColumns[':p' . $index++]  = 'valid';
         }
@@ -846,6 +991,15 @@ abstract class Usuario implements ActiveRecordInterface
                         break;
                     case 'apellido':
                         $stmt->bindValue($identifier, $this->apellido, PDO::PARAM_STR);
+                        break;
+                    case 'usuario':
+                        $stmt->bindValue($identifier, $this->usuario, PDO::PARAM_STR);
+                        break;
+                    case 'contrasena':
+                        $stmt->bindValue($identifier, $this->contrasena, PDO::PARAM_STR);
+                        break;
+                    case 'timestamp':
+                        $stmt->bindValue($identifier, $this->timestamp ? $this->timestamp->format("Y-m-d H:i:s.u") : null, PDO::PARAM_STR);
                         break;
                     case 'valid':
                         $stmt->bindValue($identifier, $this->valid, PDO::PARAM_INT);
@@ -922,6 +1076,15 @@ abstract class Usuario implements ActiveRecordInterface
                 return $this->getApellido();
                 break;
             case 3:
+                return $this->getUsuario();
+                break;
+            case 4:
+                return $this->getContrasena();
+                break;
+            case 5:
+                return $this->getTimestamp();
+                break;
+            case 6:
                 return $this->getValid();
                 break;
             default:
@@ -957,8 +1120,15 @@ abstract class Usuario implements ActiveRecordInterface
             $keys[0] => $this->getIdusuario(),
             $keys[1] => $this->getNombre(),
             $keys[2] => $this->getApellido(),
-            $keys[3] => $this->getValid(),
+            $keys[3] => $this->getUsuario(),
+            $keys[4] => $this->getContrasena(),
+            $keys[5] => $this->getTimestamp(),
+            $keys[6] => $this->getValid(),
         );
+        if ($result[$keys[5]] instanceof \DateTimeInterface) {
+            $result[$keys[5]] = $result[$keys[5]]->format('c');
+        }
+
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
             $result[$key] = $virtualColumn;
@@ -994,7 +1164,7 @@ abstract class Usuario implements ActiveRecordInterface
      *                one of the class type constants TableMap::TYPE_PHPNAME, TableMap::TYPE_CAMELNAME
      *                TableMap::TYPE_COLNAME, TableMap::TYPE_FIELDNAME, TableMap::TYPE_NUM.
      *                Defaults to TableMap::TYPE_PHPNAME.
-     * @return $this|\PropelORMAPI\DAOS\Usuario
+     * @return $this|\PropelORMAPI\ORM\Usuario
      */
     public function setByName($name, $value, $type = TableMap::TYPE_PHPNAME)
     {
@@ -1009,7 +1179,7 @@ abstract class Usuario implements ActiveRecordInterface
      *
      * @param  int $pos position in xml schema
      * @param  mixed $value field value
-     * @return $this|\PropelORMAPI\DAOS\Usuario
+     * @return $this|\PropelORMAPI\ORM\Usuario
      */
     public function setByPosition($pos, $value)
     {
@@ -1024,6 +1194,15 @@ abstract class Usuario implements ActiveRecordInterface
                 $this->setApellido($value);
                 break;
             case 3:
+                $this->setUsuario($value);
+                break;
+            case 4:
+                $this->setContrasena($value);
+                break;
+            case 5:
+                $this->setTimestamp($value);
+                break;
+            case 6:
                 $this->setValid($value);
                 break;
         } // switch()
@@ -1062,7 +1241,16 @@ abstract class Usuario implements ActiveRecordInterface
             $this->setApellido($arr[$keys[2]]);
         }
         if (array_key_exists($keys[3], $arr)) {
-            $this->setValid($arr[$keys[3]]);
+            $this->setUsuario($arr[$keys[3]]);
+        }
+        if (array_key_exists($keys[4], $arr)) {
+            $this->setContrasena($arr[$keys[4]]);
+        }
+        if (array_key_exists($keys[5], $arr)) {
+            $this->setTimestamp($arr[$keys[5]]);
+        }
+        if (array_key_exists($keys[6], $arr)) {
+            $this->setValid($arr[$keys[6]]);
         }
     }
 
@@ -1083,7 +1271,7 @@ abstract class Usuario implements ActiveRecordInterface
      * @param string $data The source data to import from
      * @param string $keyType The type of keys the array uses.
      *
-     * @return $this|\PropelORMAPI\DAOS\Usuario The current object, for fluid interface
+     * @return $this|\PropelORMAPI\ORM\Usuario The current object, for fluid interface
      */
     public function importFrom($parser, $data, $keyType = TableMap::TYPE_PHPNAME)
     {
@@ -1113,6 +1301,15 @@ abstract class Usuario implements ActiveRecordInterface
         }
         if ($this->isColumnModified(UsuarioTableMap::COL_APELLIDO)) {
             $criteria->add(UsuarioTableMap::COL_APELLIDO, $this->apellido);
+        }
+        if ($this->isColumnModified(UsuarioTableMap::COL_USUARIO)) {
+            $criteria->add(UsuarioTableMap::COL_USUARIO, $this->usuario);
+        }
+        if ($this->isColumnModified(UsuarioTableMap::COL_CONTRASENA)) {
+            $criteria->add(UsuarioTableMap::COL_CONTRASENA, $this->contrasena);
+        }
+        if ($this->isColumnModified(UsuarioTableMap::COL_TIMESTAMP)) {
+            $criteria->add(UsuarioTableMap::COL_TIMESTAMP, $this->timestamp);
         }
         if ($this->isColumnModified(UsuarioTableMap::COL_VALID)) {
             $criteria->add(UsuarioTableMap::COL_VALID, $this->valid);
@@ -1196,7 +1393,7 @@ abstract class Usuario implements ActiveRecordInterface
      * If desired, this method can also make copies of all associated (fkey referrers)
      * objects.
      *
-     * @param      object $copyObj An object of \PropelORMAPI\DAOS\Usuario (or compatible) type.
+     * @param      object $copyObj An object of \PropelORMAPI\ORM\Usuario (or compatible) type.
      * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
      * @param      boolean $makeNew Whether to reset autoincrement PKs and make the object new.
      * @throws PropelException
@@ -1205,6 +1402,9 @@ abstract class Usuario implements ActiveRecordInterface
     {
         $copyObj->setNombre($this->getNombre());
         $copyObj->setApellido($this->getApellido());
+        $copyObj->setUsuario($this->getUsuario());
+        $copyObj->setContrasena($this->getContrasena());
+        $copyObj->setTimestamp($this->getTimestamp());
         $copyObj->setValid($this->getValid());
 
         if ($deepCopy) {
@@ -1235,7 +1435,7 @@ abstract class Usuario implements ActiveRecordInterface
      * objects.
      *
      * @param  boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-     * @return \PropelORMAPI\DAOS\Usuario Clone of current object.
+     * @return \PropelORMAPI\ORM\Usuario Clone of current object.
      * @throws PropelException
      */
     public function copy($deepCopy = false)
@@ -1308,7 +1508,7 @@ abstract class Usuario implements ActiveRecordInterface
         $collectionClassName = UsuariotareaTableMap::getTableMap()->getCollectionClassName();
 
         $this->collUsuariotareas = new $collectionClassName;
-        $this->collUsuariotareas->setModel('\PropelORMAPI\DAOS\Usuariotarea');
+        $this->collUsuariotareas->setModel('\PropelORMAPI\ORM\Usuariotarea');
     }
 
     /**
@@ -1444,7 +1644,7 @@ abstract class Usuario implements ActiveRecordInterface
      * through the ChildUsuariotarea foreign key attribute.
      *
      * @param  ChildUsuariotarea $l ChildUsuariotarea
-     * @return $this|\PropelORMAPI\DAOS\Usuario The current object (for fluent API support)
+     * @return $this|\PropelORMAPI\ORM\Usuario The current object (for fluent API support)
      */
     public function addUsuariotarea(ChildUsuariotarea $l)
     {
@@ -1842,6 +2042,9 @@ abstract class Usuario implements ActiveRecordInterface
         $this->idusuario = null;
         $this->nombre = null;
         $this->apellido = null;
+        $this->usuario = null;
+        $this->contrasena = null;
+        $this->timestamp = null;
         $this->valid = null;
         $this->alreadyInSave = false;
         $this->clearAllReferences();

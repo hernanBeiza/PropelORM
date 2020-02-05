@@ -1,12 +1,12 @@
 <?php
 
-namespace PropelORMAPI\DAOS\Base;
+namespace PropelORMAPI\ORM\Base;
 
 use \Exception;
 use \PDO;
-use PropelORMAPI\DAOS\Tarea as ChildTarea;
-use PropelORMAPI\DAOS\TareaQuery as ChildTareaQuery;
-use PropelORMAPI\DAOS\Map\TareaTableMap;
+use PropelORMAPI\ORM\Tarea as ChildTarea;
+use PropelORMAPI\ORM\TareaQuery as ChildTareaQuery;
+use PropelORMAPI\ORM\Map\TareaTableMap;
 use Propel\Runtime\Propel;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
@@ -48,7 +48,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildTareaQuery rightJoinWithUsuariotarea() Adds a RIGHT JOIN clause and with to the query using the Usuariotarea relation
  * @method     ChildTareaQuery innerJoinWithUsuariotarea() Adds a INNER JOIN clause and with to the query using the Usuariotarea relation
  *
- * @method     \PropelORMAPI\DAOS\UsuariotareaQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
+ * @method     \PropelORMAPI\ORM\UsuariotareaQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
  *
  * @method     ChildTarea findOne(ConnectionInterface $con = null) Return the first ChildTarea matching the query
  * @method     ChildTarea findOneOrCreate(ConnectionInterface $con = null) Return the first ChildTarea matching the query, or a new ChildTarea object populated from the query conditions when no match is found
@@ -79,13 +79,13 @@ abstract class TareaQuery extends ModelCriteria
     protected $entityNotFoundExceptionClass = '\\Propel\\Runtime\\Exception\\EntityNotFoundException';
 
     /**
-     * Initializes internal state of \PropelORMAPI\DAOS\Base\TareaQuery object.
+     * Initializes internal state of \PropelORMAPI\ORM\Base\TareaQuery object.
      *
      * @param     string $dbName The database name
      * @param     string $modelName The phpName of a model, e.g. 'Book'
      * @param     string $modelAlias The alias for the model in this query, e.g. 'b'
      */
-    public function __construct($dbName = 'tareaconnection', $modelName = '\\PropelORMAPI\\DAOS\\Tarea', $modelAlias = null)
+    public function __construct($dbName = 'tareaconnection', $modelName = '\\PropelORMAPI\\ORM\\Tarea', $modelAlias = null)
     {
         parent::__construct($dbName, $modelName, $modelAlias);
     }
@@ -410,16 +410,16 @@ abstract class TareaQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query by a related \PropelORMAPI\DAOS\Usuariotarea object
+     * Filter the query by a related \PropelORMAPI\ORM\Usuariotarea object
      *
-     * @param \PropelORMAPI\DAOS\Usuariotarea|ObjectCollection $usuariotarea the related object to use as filter
+     * @param \PropelORMAPI\ORM\Usuariotarea|ObjectCollection $usuariotarea the related object to use as filter
      * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return ChildTareaQuery The current query, for fluid interface
      */
     public function filterByUsuariotarea($usuariotarea, $comparison = null)
     {
-        if ($usuariotarea instanceof \PropelORMAPI\DAOS\Usuariotarea) {
+        if ($usuariotarea instanceof \PropelORMAPI\ORM\Usuariotarea) {
             return $this
                 ->addUsingAlias(TareaTableMap::COL_IDTAREA, $usuariotarea->getIdtarea(), $comparison);
         } elseif ($usuariotarea instanceof ObjectCollection) {
@@ -428,7 +428,7 @@ abstract class TareaQuery extends ModelCriteria
                 ->filterByPrimaryKeys($usuariotarea->getPrimaryKeys())
                 ->endUse();
         } else {
-            throw new PropelException('filterByUsuariotarea() only accepts arguments of type \PropelORMAPI\DAOS\Usuariotarea or Collection');
+            throw new PropelException('filterByUsuariotarea() only accepts arguments of type \PropelORMAPI\ORM\Usuariotarea or Collection');
         }
     }
 
@@ -473,13 +473,13 @@ abstract class TareaQuery extends ModelCriteria
      *                                   to be used as main alias in the secondary query
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return \PropelORMAPI\DAOS\UsuariotareaQuery A secondary query class using the current class as primary query
+     * @return \PropelORMAPI\ORM\UsuariotareaQuery A secondary query class using the current class as primary query
      */
     public function useUsuariotareaQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
             ->joinUsuariotarea($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'Usuariotarea', '\PropelORMAPI\DAOS\UsuariotareaQuery');
+            ->useQuery($relationAlias ? $relationAlias : 'Usuariotarea', '\PropelORMAPI\ORM\UsuariotareaQuery');
     }
 
     /**

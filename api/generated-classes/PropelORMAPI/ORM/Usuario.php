@@ -1,11 +1,11 @@
 <?php
 
-namespace PropelORMAPI\DAOS;
+namespace PropelORMAPI\ORM;
 
-use PropelORMAPI\DAOS\Base\Tarea as BaseTarea;
+use PropelORMAPI\ORM\Base\Usuario as BaseUsuario;
 
 /**
- * Skeleton subclass for representing a row from the 'tarea' table.
+ * Skeleton subclass for representing a row from the 'usuario' table.
  *
  *
  *
@@ -14,7 +14,7 @@ use PropelORMAPI\DAOS\Base\Tarea as BaseTarea;
  * long as it does not already exist in the output directory.
  *
  */
-class Tarea extends BaseTarea
+class Usuario extends BaseUsuario
 {
 
 }

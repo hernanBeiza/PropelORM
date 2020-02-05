@@ -1,16 +1,16 @@
 <?php
 
-namespace PropelORMAPI\DAOS\Base;
+namespace PropelORMAPI\ORM\Base;
 
 use \DateTime;
 use \Exception;
 use \PDO;
-use PropelORMAPI\DAOS\Tarea as ChildTarea;
-use PropelORMAPI\DAOS\TareaQuery as ChildTareaQuery;
-use PropelORMAPI\DAOS\Usuario as ChildUsuario;
-use PropelORMAPI\DAOS\UsuarioQuery as ChildUsuarioQuery;
-use PropelORMAPI\DAOS\UsuariotareaQuery as ChildUsuariotareaQuery;
-use PropelORMAPI\DAOS\Map\UsuariotareaTableMap;
+use PropelORMAPI\ORM\Tarea as ChildTarea;
+use PropelORMAPI\ORM\TareaQuery as ChildTareaQuery;
+use PropelORMAPI\ORM\Usuario as ChildUsuario;
+use PropelORMAPI\ORM\UsuarioQuery as ChildUsuarioQuery;
+use PropelORMAPI\ORM\UsuariotareaQuery as ChildUsuariotareaQuery;
+use PropelORMAPI\ORM\Map\UsuariotareaTableMap;
 use Propel\Runtime\Propel;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
@@ -29,14 +29,14 @@ use Propel\Runtime\Util\PropelDateTime;
  *
  *
  *
- * @package    propel.generator.PropelORMAPI.DAOS.Base
+ * @package    propel.generator.PropelORMAPI.ORM.Base
  */
 abstract class Usuariotarea implements ActiveRecordInterface
 {
     /**
      * TableMap class name
      */
-    const TABLE_MAP = '\\PropelORMAPI\\DAOS\\Map\\UsuariotareaTableMap';
+    const TABLE_MAP = '\\PropelORMAPI\\ORM\\Map\\UsuariotareaTableMap';
 
 
     /**
@@ -132,7 +132,7 @@ abstract class Usuariotarea implements ActiveRecordInterface
     }
 
     /**
-     * Initializes internal state of PropelORMAPI\DAOS\Base\Usuariotarea object.
+     * Initializes internal state of PropelORMAPI\ORM\Base\Usuariotarea object.
      * @see applyDefaults()
      */
     public function __construct()
@@ -422,7 +422,7 @@ abstract class Usuariotarea implements ActiveRecordInterface
      * Set the value of [idusuariotarea] column.
      *
      * @param int $v new value
-     * @return $this|\PropelORMAPI\DAOS\Usuariotarea The current object (for fluent API support)
+     * @return $this|\PropelORMAPI\ORM\Usuariotarea The current object (for fluent API support)
      */
     public function setIdusuariotarea($v)
     {
@@ -442,7 +442,7 @@ abstract class Usuariotarea implements ActiveRecordInterface
      * Set the value of [idusuario] column.
      *
      * @param int $v new value
-     * @return $this|\PropelORMAPI\DAOS\Usuariotarea The current object (for fluent API support)
+     * @return $this|\PropelORMAPI\ORM\Usuariotarea The current object (for fluent API support)
      */
     public function setIdusuario($v)
     {
@@ -466,7 +466,7 @@ abstract class Usuariotarea implements ActiveRecordInterface
      * Set the value of [idtarea] column.
      *
      * @param int $v new value
-     * @return $this|\PropelORMAPI\DAOS\Usuariotarea The current object (for fluent API support)
+     * @return $this|\PropelORMAPI\ORM\Usuariotarea The current object (for fluent API support)
      */
     public function setIdtarea($v)
     {
@@ -491,7 +491,7 @@ abstract class Usuariotarea implements ActiveRecordInterface
      *
      * @param  mixed $v string, integer (timestamp), or \DateTimeInterface value.
      *               Empty strings are treated as NULL.
-     * @return $this|\PropelORMAPI\DAOS\Usuariotarea The current object (for fluent API support)
+     * @return $this|\PropelORMAPI\ORM\Usuariotarea The current object (for fluent API support)
      */
     public function setTimestamp($v)
     {
@@ -510,7 +510,7 @@ abstract class Usuariotarea implements ActiveRecordInterface
      * Set the value of [valid] column.
      *
      * @param int $v new value
-     * @return $this|\PropelORMAPI\DAOS\Usuariotarea The current object (for fluent API support)
+     * @return $this|\PropelORMAPI\ORM\Usuariotarea The current object (for fluent API support)
      */
     public function setValid($v)
     {
@@ -594,7 +594,7 @@ abstract class Usuariotarea implements ActiveRecordInterface
             return $startcol + 5; // 5 = UsuariotareaTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
-            throw new PropelException(sprintf('Error populating %s object', '\\PropelORMAPI\\DAOS\\Usuariotarea'), 0, $e);
+            throw new PropelException(sprintf('Error populating %s object', '\\PropelORMAPI\\ORM\\Usuariotarea'), 0, $e);
         }
     }
 
@@ -1027,7 +1027,7 @@ abstract class Usuariotarea implements ActiveRecordInterface
      *                one of the class type constants TableMap::TYPE_PHPNAME, TableMap::TYPE_CAMELNAME
      *                TableMap::TYPE_COLNAME, TableMap::TYPE_FIELDNAME, TableMap::TYPE_NUM.
      *                Defaults to TableMap::TYPE_PHPNAME.
-     * @return $this|\PropelORMAPI\DAOS\Usuariotarea
+     * @return $this|\PropelORMAPI\ORM\Usuariotarea
      */
     public function setByName($name, $value, $type = TableMap::TYPE_PHPNAME)
     {
@@ -1042,7 +1042,7 @@ abstract class Usuariotarea implements ActiveRecordInterface
      *
      * @param  int $pos position in xml schema
      * @param  mixed $value field value
-     * @return $this|\PropelORMAPI\DAOS\Usuariotarea
+     * @return $this|\PropelORMAPI\ORM\Usuariotarea
      */
     public function setByPosition($pos, $value)
     {
@@ -1122,7 +1122,7 @@ abstract class Usuariotarea implements ActiveRecordInterface
      * @param string $data The source data to import from
      * @param string $keyType The type of keys the array uses.
      *
-     * @return $this|\PropelORMAPI\DAOS\Usuariotarea The current object, for fluid interface
+     * @return $this|\PropelORMAPI\ORM\Usuariotarea The current object, for fluid interface
      */
     public function importFrom($parser, $data, $keyType = TableMap::TYPE_PHPNAME)
     {
@@ -1264,7 +1264,7 @@ abstract class Usuariotarea implements ActiveRecordInterface
      * If desired, this method can also make copies of all associated (fkey referrers)
      * objects.
      *
-     * @param      object $copyObj An object of \PropelORMAPI\DAOS\Usuariotarea (or compatible) type.
+     * @param      object $copyObj An object of \PropelORMAPI\ORM\Usuariotarea (or compatible) type.
      * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
      * @param      boolean $makeNew Whether to reset autoincrement PKs and make the object new.
      * @throws PropelException
@@ -1290,7 +1290,7 @@ abstract class Usuariotarea implements ActiveRecordInterface
      * objects.
      *
      * @param  boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-     * @return \PropelORMAPI\DAOS\Usuariotarea Clone of current object.
+     * @return \PropelORMAPI\ORM\Usuariotarea Clone of current object.
      * @throws PropelException
      */
     public function copy($deepCopy = false)
@@ -1307,7 +1307,7 @@ abstract class Usuariotarea implements ActiveRecordInterface
      * Declares an association between this object and a ChildTarea object.
      *
      * @param  ChildTarea $v
-     * @return $this|\PropelORMAPI\DAOS\Usuariotarea The current object (for fluent API support)
+     * @return $this|\PropelORMAPI\ORM\Usuariotarea The current object (for fluent API support)
      * @throws PropelException
      */
     public function setTarea(ChildTarea $v = null)
@@ -1358,7 +1358,7 @@ abstract class Usuariotarea implements ActiveRecordInterface
      * Declares an association between this object and a ChildUsuario object.
      *
      * @param  ChildUsuario $v
-     * @return $this|\PropelORMAPI\DAOS\Usuariotarea The current object (for fluent API support)
+     * @return $this|\PropelORMAPI\ORM\Usuariotarea The current object (for fluent API support)
      * @throws PropelException
      */
     public function setUsuario(ChildUsuario $v = null)

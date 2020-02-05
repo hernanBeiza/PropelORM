@@ -5,9 +5,9 @@ $serviceContainer->setAdapterClass('tareaconnection', 'mysql');
 $manager = new \Propel\Runtime\Connection\ConnectionManagerSingle();
 $manager->setConfiguration(array (
   'classname' => 'Propel\\Runtime\\Connection\\DebugPDO',
-  'dsn' => 'mysql:host=mihost;dbname=midb;charset=utf8',
-  'user' => 'miusuario',
-  'password' => 'micontrasena',
+  'dsn' => 'mysql:host=192.168.56.101;dbname=tareadb;charset=utf8',
+  'user' => 'root',
+  'password' => '0C3v8ea0',
   'attributes' =>
   array (
     'ATTR_EMULATE_PREPARES' => false,

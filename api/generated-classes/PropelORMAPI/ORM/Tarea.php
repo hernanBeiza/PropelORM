@@ -1,11 +1,11 @@
 <?php
 
-namespace PropelORMAPI\DAOS;
+namespace PropelORMAPI\ORM;
 
-use PropelORMAPI\DAOS\Base\TareaQuery as BaseTareaQuery;
+use PropelORMAPI\ORM\Base\Tarea as BaseTarea;
 
 /**
- * Skeleton subclass for performing query and update operations on the 'tarea' table.
+ * Skeleton subclass for representing a row from the 'tarea' table.
  *
  *
  *
@@ -14,7 +14,7 @@ use PropelORMAPI\DAOS\Base\TareaQuery as BaseTareaQuery;
  * long as it does not already exist in the output directory.
  *
  */
-class TareaQuery extends BaseTareaQuery
+class Tarea extends BaseTarea
 {
 
 }

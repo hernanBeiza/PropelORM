@@ -1,9 +1,9 @@
 <?php
 
-namespace PropelORMAPI\DAOS\Map;
+namespace PropelORMAPI\ORM\Map;
 
-use PropelORMAPI\DAOS\Usuario;
-use PropelORMAPI\DAOS\UsuarioQuery;
+use PropelORMAPI\ORM\Usuario;
+use PropelORMAPI\ORM\UsuarioQuery;
 use Propel\Runtime\Propel;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\InstancePoolTrait;
@@ -34,7 +34,7 @@ class UsuarioTableMap extends TableMap
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'PropelORMAPI.DAOS.Map.UsuarioTableMap';
+    const CLASS_NAME = 'PropelORMAPI.ORM.Map.UsuarioTableMap';
 
     /**
      * The default database name for this class
@@ -49,17 +49,17 @@ class UsuarioTableMap extends TableMap
     /**
      * The related Propel class for this table
      */
-    const OM_CLASS = '\\PropelORMAPI\\DAOS\\Usuario';
+    const OM_CLASS = '\\PropelORMAPI\\ORM\\Usuario';
 
     /**
      * A class that can be returned by this tableMap
      */
-    const CLASS_DEFAULT = 'PropelORMAPI.DAOS.Usuario';
+    const CLASS_DEFAULT = 'PropelORMAPI.ORM.Usuario';
 
     /**
      * The total number of columns
      */
-    const NUM_COLUMNS = 4;
+    const NUM_COLUMNS = 7;
 
     /**
      * The number of lazy-loaded columns
@@ -69,7 +69,7 @@ class UsuarioTableMap extends TableMap
     /**
      * The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS)
      */
-    const NUM_HYDRATE_COLUMNS = 4;
+    const NUM_HYDRATE_COLUMNS = 7;
 
     /**
      * the column name for the idusuario field
@@ -85,6 +85,21 @@ class UsuarioTableMap extends TableMap
      * the column name for the apellido field
      */
     const COL_APELLIDO = 'usuario.apellido';
+
+    /**
+     * the column name for the usuario field
+     */
+    const COL_USUARIO = 'usuario.usuario';
+
+    /**
+     * the column name for the contrasena field
+     */
+    const COL_CONTRASENA = 'usuario.contrasena';
+
+    /**
+     * the column name for the timestamp field
+     */
+    const COL_TIMESTAMP = 'usuario.timestamp';
 
     /**
      * the column name for the valid field
@@ -103,11 +118,11 @@ class UsuarioTableMap extends TableMap
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        self::TYPE_PHPNAME       => array('Idusuario', 'Nombre', 'Apellido', 'Valid', ),
-        self::TYPE_CAMELNAME     => array('idusuario', 'nombre', 'apellido', 'valid', ),
-        self::TYPE_COLNAME       => array(UsuarioTableMap::COL_IDUSUARIO, UsuarioTableMap::COL_NOMBRE, UsuarioTableMap::COL_APELLIDO, UsuarioTableMap::COL_VALID, ),
-        self::TYPE_FIELDNAME     => array('idusuario', 'nombre', 'apellido', 'valid', ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, )
+        self::TYPE_PHPNAME       => array('Idusuario', 'Nombre', 'Apellido', 'Usuario', 'Contrasena', 'Timestamp', 'Valid', ),
+        self::TYPE_CAMELNAME     => array('idusuario', 'nombre', 'apellido', 'usuario', 'contrasena', 'timestamp', 'valid', ),
+        self::TYPE_COLNAME       => array(UsuarioTableMap::COL_IDUSUARIO, UsuarioTableMap::COL_NOMBRE, UsuarioTableMap::COL_APELLIDO, UsuarioTableMap::COL_USUARIO, UsuarioTableMap::COL_CONTRASENA, UsuarioTableMap::COL_TIMESTAMP, UsuarioTableMap::COL_VALID, ),
+        self::TYPE_FIELDNAME     => array('idusuario', 'nombre', 'apellido', 'usuario', 'contrasena', 'timestamp', 'valid', ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, )
     );
 
     /**
@@ -117,11 +132,11 @@ class UsuarioTableMap extends TableMap
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        self::TYPE_PHPNAME       => array('Idusuario' => 0, 'Nombre' => 1, 'Apellido' => 2, 'Valid' => 3, ),
-        self::TYPE_CAMELNAME     => array('idusuario' => 0, 'nombre' => 1, 'apellido' => 2, 'valid' => 3, ),
-        self::TYPE_COLNAME       => array(UsuarioTableMap::COL_IDUSUARIO => 0, UsuarioTableMap::COL_NOMBRE => 1, UsuarioTableMap::COL_APELLIDO => 2, UsuarioTableMap::COL_VALID => 3, ),
-        self::TYPE_FIELDNAME     => array('idusuario' => 0, 'nombre' => 1, 'apellido' => 2, 'valid' => 3, ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, )
+        self::TYPE_PHPNAME       => array('Idusuario' => 0, 'Nombre' => 1, 'Apellido' => 2, 'Usuario' => 3, 'Contrasena' => 4, 'Timestamp' => 5, 'Valid' => 6, ),
+        self::TYPE_CAMELNAME     => array('idusuario' => 0, 'nombre' => 1, 'apellido' => 2, 'usuario' => 3, 'contrasena' => 4, 'timestamp' => 5, 'valid' => 6, ),
+        self::TYPE_COLNAME       => array(UsuarioTableMap::COL_IDUSUARIO => 0, UsuarioTableMap::COL_NOMBRE => 1, UsuarioTableMap::COL_APELLIDO => 2, UsuarioTableMap::COL_USUARIO => 3, UsuarioTableMap::COL_CONTRASENA => 4, UsuarioTableMap::COL_TIMESTAMP => 5, UsuarioTableMap::COL_VALID => 6, ),
+        self::TYPE_FIELDNAME     => array('idusuario' => 0, 'nombre' => 1, 'apellido' => 2, 'usuario' => 3, 'contrasena' => 4, 'timestamp' => 5, 'valid' => 6, ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, )
     );
 
     /**
@@ -137,13 +152,16 @@ class UsuarioTableMap extends TableMap
         $this->setName('usuario');
         $this->setPhpName('Usuario');
         $this->setIdentifierQuoting(false);
-        $this->setClassName('\\PropelORMAPI\\DAOS\\Usuario');
-        $this->setPackage('PropelORMAPI.DAOS');
+        $this->setClassName('\\PropelORMAPI\\ORM\\Usuario');
+        $this->setPackage('PropelORMAPI.ORM');
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('idusuario', 'Idusuario', 'INTEGER', true, null, null);
-        $this->addColumn('nombre', 'Nombre', 'VARCHAR', false, 45, null);
+        $this->addColumn('nombre', 'Nombre', 'VARCHAR', true, 45, null);
         $this->addColumn('apellido', 'Apellido', 'VARCHAR', false, 45, null);
+        $this->addColumn('usuario', 'Usuario', 'VARCHAR', true, 45, null);
+        $this->addColumn('contrasena', 'Contrasena', 'VARCHAR', true, 45, null);
+        $this->addColumn('timestamp', 'Timestamp', 'TIMESTAMP', true, null, 'CURRENT_TIMESTAMP');
         $this->addColumn('valid', 'Valid', 'TINYINT', true, null, 1);
     } // initialize()
 
@@ -152,14 +170,14 @@ class UsuarioTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('Usuariotarea', '\\PropelORMAPI\\DAOS\\Usuariotarea', RelationMap::ONE_TO_MANY, array (
+        $this->addRelation('Usuariotarea', '\\PropelORMAPI\\ORM\\Usuariotarea', RelationMap::ONE_TO_MANY, array (
   0 =>
   array (
     0 => ':idusuario',
     1 => ':idusuario',
   ),
 ), null, null, 'Usuariotareas', false);
-        $this->addRelation('Tarea', '\\PropelORMAPI\\DAOS\\Tarea', RelationMap::MANY_TO_MANY, array(), null, null, 'Tareas');
+        $this->addRelation('Tarea', '\\PropelORMAPI\\ORM\\Tarea', RelationMap::MANY_TO_MANY, array(), null, null, 'Tareas');
     } // buildRelations()
 
     /**
@@ -306,11 +324,17 @@ class UsuarioTableMap extends TableMap
             $criteria->addSelectColumn(UsuarioTableMap::COL_IDUSUARIO);
             $criteria->addSelectColumn(UsuarioTableMap::COL_NOMBRE);
             $criteria->addSelectColumn(UsuarioTableMap::COL_APELLIDO);
+            $criteria->addSelectColumn(UsuarioTableMap::COL_USUARIO);
+            $criteria->addSelectColumn(UsuarioTableMap::COL_CONTRASENA);
+            $criteria->addSelectColumn(UsuarioTableMap::COL_TIMESTAMP);
             $criteria->addSelectColumn(UsuarioTableMap::COL_VALID);
         } else {
             $criteria->addSelectColumn($alias . '.idusuario');
             $criteria->addSelectColumn($alias . '.nombre');
             $criteria->addSelectColumn($alias . '.apellido');
+            $criteria->addSelectColumn($alias . '.usuario');
+            $criteria->addSelectColumn($alias . '.contrasena');
+            $criteria->addSelectColumn($alias . '.timestamp');
             $criteria->addSelectColumn($alias . '.valid');
         }
     }
@@ -358,7 +382,7 @@ class UsuarioTableMap extends TableMap
         if ($values instanceof Criteria) {
             // rename for clarity
             $criteria = $values;
-        } elseif ($values instanceof \PropelORMAPI\DAOS\Usuario) { // it's a model object
+        } elseif ($values instanceof \PropelORMAPI\ORM\Usuario) { // it's a model object
             // create criteria based on pk values
             $criteria = $values->buildPkeyCriteria();
         } else { // it's a primary key, or an array of pks

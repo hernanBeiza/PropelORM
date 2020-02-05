@@ -48,8 +48,11 @@ $container['DBDAO'] = function ($c) {
 $container['IndexDAO'] = function ($c) {
   return new \PropelORMAPI\DAOS\IndexDAO($c);
 };
-$container['PersonaDAO'] = function ($c) {
-  return new \PropelORMAPI\DAOS\IndexDAO($c);
+$container['UsuarioDAO'] = function ($c) {
+  return new \PropelORMAPI\DAOS\UsuarioDAO($c);
+};
+$container['TareaDAO'] = function ($c) {
+  return new \PropelORMAPI\DAOS\TareaDAO($c);
 };
 // Models DAOS
 $container['Index'] = function ($c) {

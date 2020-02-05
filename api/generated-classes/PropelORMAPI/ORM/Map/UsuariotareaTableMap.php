@@ -1,9 +1,9 @@
 <?php
 
-namespace PropelORMAPI\DAOS\Map;
+namespace PropelORMAPI\ORM\Map;
 
-use PropelORMAPI\DAOS\Usuariotarea;
-use PropelORMAPI\DAOS\UsuariotareaQuery;
+use PropelORMAPI\ORM\Usuariotarea;
+use PropelORMAPI\ORM\UsuariotareaQuery;
 use Propel\Runtime\Propel;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\InstancePoolTrait;
@@ -34,7 +34,7 @@ class UsuariotareaTableMap extends TableMap
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'PropelORMAPI.DAOS.Map.UsuariotareaTableMap';
+    const CLASS_NAME = 'PropelORMAPI.ORM.Map.UsuariotareaTableMap';
 
     /**
      * The default database name for this class
@@ -49,12 +49,12 @@ class UsuariotareaTableMap extends TableMap
     /**
      * The related Propel class for this table
      */
-    const OM_CLASS = '\\PropelORMAPI\\DAOS\\Usuariotarea';
+    const OM_CLASS = '\\PropelORMAPI\\ORM\\Usuariotarea';
 
     /**
      * A class that can be returned by this tableMap
      */
-    const CLASS_DEFAULT = 'PropelORMAPI.DAOS.Usuariotarea';
+    const CLASS_DEFAULT = 'PropelORMAPI.ORM.Usuariotarea';
 
     /**
      * The total number of columns
@@ -142,8 +142,8 @@ class UsuariotareaTableMap extends TableMap
         $this->setName('usuariotarea');
         $this->setPhpName('Usuariotarea');
         $this->setIdentifierQuoting(false);
-        $this->setClassName('\\PropelORMAPI\\DAOS\\Usuariotarea');
-        $this->setPackage('PropelORMAPI.DAOS');
+        $this->setClassName('\\PropelORMAPI\\ORM\\Usuariotarea');
+        $this->setPackage('PropelORMAPI.ORM');
         $this->setUseIdGenerator(true);
         $this->setIsCrossRef(true);
         // columns
@@ -159,14 +159,14 @@ class UsuariotareaTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('Tarea', '\\PropelORMAPI\\DAOS\\Tarea', RelationMap::MANY_TO_ONE, array (
+        $this->addRelation('Tarea', '\\PropelORMAPI\\ORM\\Tarea', RelationMap::MANY_TO_ONE, array (
   0 =>
   array (
     0 => ':idtarea',
     1 => ':idtarea',
   ),
 ), null, null, null, false);
-        $this->addRelation('Usuario', '\\PropelORMAPI\\DAOS\\Usuario', RelationMap::MANY_TO_ONE, array (
+        $this->addRelation('Usuario', '\\PropelORMAPI\\ORM\\Usuario', RelationMap::MANY_TO_ONE, array (
   0 =>
   array (
     0 => ':idusuario',
@@ -183,7 +183,7 @@ class UsuariotareaTableMap extends TableMap
      * to the cache in order to ensure that the same objects are always returned by find*()
      * and findPk*() calls.
      *
-     * @param \PropelORMAPI\DAOS\Usuariotarea $obj A \PropelORMAPI\DAOS\Usuariotarea object.
+     * @param \PropelORMAPI\ORM\Usuariotarea $obj A \PropelORMAPI\ORM\Usuariotarea object.
      * @param string $key             (optional) key to use for instance map (for performance boost if key was already calculated externally).
      */
     public static function addInstanceToPool($obj, $key = null)
@@ -204,12 +204,12 @@ class UsuariotareaTableMap extends TableMap
      * methods in your stub classes -- you may need to explicitly remove objects
      * from the cache in order to prevent returning objects that no longer exist.
      *
-     * @param mixed $value A \PropelORMAPI\DAOS\Usuariotarea object or a primary key value.
+     * @param mixed $value A \PropelORMAPI\ORM\Usuariotarea object or a primary key value.
      */
     public static function removeInstanceFromPool($value)
     {
         if (Propel::isInstancePoolingEnabled() && null !== $value) {
-            if (is_object($value) && $value instanceof \PropelORMAPI\DAOS\Usuariotarea) {
+            if (is_object($value) && $value instanceof \PropelORMAPI\ORM\Usuariotarea) {
                 $key = serialize([(null === $value->getIdusuariotarea() || is_scalar($value->getIdusuariotarea()) || is_callable([$value->getIdusuariotarea(), '__toString']) ? (string) $value->getIdusuariotarea() : $value->getIdusuariotarea()), (null === $value->getIdusuario() || is_scalar($value->getIdusuario()) || is_callable([$value->getIdusuario(), '__toString']) ? (string) $value->getIdusuario() : $value->getIdusuario()), (null === $value->getIdtarea() || is_scalar($value->getIdtarea()) || is_callable([$value->getIdtarea(), '__toString']) ? (string) $value->getIdtarea() : $value->getIdtarea())]);
 
             } elseif (is_array($value) && count($value) === 3) {
@@ -220,7 +220,7 @@ class UsuariotareaTableMap extends TableMap
 
                 return;
             } else {
-                $e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or \PropelORMAPI\DAOS\Usuariotarea object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value, true)));
+                $e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or \PropelORMAPI\ORM\Usuariotarea object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value, true)));
                 throw $e;
             }
 
@@ -440,7 +440,7 @@ class UsuariotareaTableMap extends TableMap
         if ($values instanceof Criteria) {
             // rename for clarity
             $criteria = $values;
-        } elseif ($values instanceof \PropelORMAPI\DAOS\Usuariotarea) { // it's a model object
+        } elseif ($values instanceof \PropelORMAPI\ORM\Usuariotarea) { // it's a model object
             // create criteria based on pk values
             $criteria = $values->buildPkeyCriteria();
         } else { // it's a primary key, or an array of pks

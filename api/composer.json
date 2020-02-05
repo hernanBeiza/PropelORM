@@ -25,7 +25,7 @@
       "PropelORMAPI\\" : "src"
     },
 	  "psr-0": {
-      "PropelORMAPI\\DAOS\\": "generated-classes"
+      "PropelORMAPI\\ORM\\": "generated-classes"
     }
   },
 	"scripts": {
@@ -35,10 +35,10 @@
     "propel":"propel",
     "propel:init":"propel init",
     "propel:reverse:config":"propel reverse --config-dir='config'",
-    "propel:reverse":"propel reverse 'mysql:host=mihost;dbname=midb;user=miusuario;password=micontrasena;charset=UTF8' --verbose --output-dir='propel/schema'",
+    "propel:reverse":"propel reverse 'mysql:host=192.168.56.101;dbname=tareadb;user=root;password=0C3v8ea0;charset=UTF8' --verbose --output-dir='propel/schema'",
     "propel:sql":"propel sql:build --config-dir='config' --schema-dir='propel/schema' --output-dir='propel/sql'",
     "propel:build2":"propel model:build --config-dir='config' --schema-dir='propel/schema' --output-dir='src/DAOS'",
-    "propel:build":"composer clean && propel model:build --config-dir='config' --schema-dir='propel/schema'",
+    "propel:build":"propel model:build --config-dir='config' --schema-dir='propel/schema'",
 		"propel:config": "propel config:convert --output-dir='src/DAOS'",
 		"clean": "rm -rf generated-classes"
 	},

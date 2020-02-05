@@ -26,7 +26,7 @@ class TareaVO implements JsonSerializable
   	if($tarea){
 	    $instance->setIdTarea($tarea->getIdTarea());
 	    $instance->setTitulo($tarea->getTitulo());
-	    $instance->setTimeStamp($tarea->getTimeStamp());
+	    $instance->setTimestamp($tarea->getTimestamp());
 	    $instance->setValid($tarea->getValid());
   	}
     return $instance;

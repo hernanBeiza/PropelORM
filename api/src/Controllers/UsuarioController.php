@@ -36,10 +36,20 @@ class UsuarioController
 			$enviar = false;
 			$errores.="\napellido";
 		}
+		if($data["usuario"]==null){
+			$enviar = false;
+			$errores.="\nusuario";
+		}
+		if($data["contrasena"]==null){
+			$enviar = false;
+			$errores.="\ncontrasena";
+		}
 		if($enviar){
 			$usuarioVO = new UsuarioVO();
 			$usuarioVO->setNombre($data["nombre"]);
 			$usuarioVO->setApellido($data["apellido"]);
+			$usuarioVO->setUsuario($data["usuario"]);
+			$usuarioVO->setContrasena($data["contrasena"]);
     	$respuesta = $this->c->UsuarioService->guardar($usuarioVO);
 		} else {
 			$respuesta = array("result"=>false, "errores"=>$errores);
@@ -76,11 +86,26 @@ class UsuarioController
 			$enviar = false;
 			$errores.="\napellido";
 		}
+		if($data["usuario"]==null){
+			$enviar = false;
+			$errores.="\nusuario";
+		}
+		if($data["contrasena"]==null){
+			$enviar = false;
+			$errores.="\ncontrasena";
+		}		
+		if($data["valid"]==null){
+			$enviar = false;
+			$errores.="\nvalid";
+		}
 		if($enviar){
 			$usuarioVO = new UsuarioVO();
 			$usuarioVO->setIdUsuario($idusuario);
 			$usuarioVO->setNombre($data["nombre"]);
 			$usuarioVO->setApellido($data["apellido"]);
+			$usuarioVO->setUsuario($data["usuario"]);
+			$usuarioVO->setContrasena($data["contrasena"]);			
+			$usuarioVO->setValid($data["valid"]);			
     	$respuesta = $this->c->UsuarioService->editar($usuarioVO);
 		} else {
 			$respuesta = array("result"=>false, "errores"=>$errores);

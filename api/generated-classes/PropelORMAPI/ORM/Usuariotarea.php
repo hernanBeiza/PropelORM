@@ -1,8 +1,8 @@
 <?php
 
-namespace PropelORMAPI\DAOS;
+namespace PropelORMAPI\ORM;
 
-use PropelORMAPI\DAOS\Base\Usuariotarea as BaseUsuariotarea;
+use PropelORMAPI\ORM\Base\Usuariotarea as BaseUsuariotarea;
 
 /**
  * Skeleton subclass for representing a row from the 'usuariotarea' table.

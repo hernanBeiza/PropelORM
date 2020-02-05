@@ -1,8 +1,8 @@
 <?php
 
-namespace PropelORMAPI\DAOS;
+namespace PropelORMAPI\ORM;
 
-use PropelORMAPI\DAOS\Base\UsuariotareaQuery as BaseUsuariotareaQuery;
+use PropelORMAPI\ORM\Base\UsuariotareaQuery as BaseUsuariotareaQuery;
 
 /**
  * Skeleton subclass for performing query and update operations on the 'usuariotarea' table.

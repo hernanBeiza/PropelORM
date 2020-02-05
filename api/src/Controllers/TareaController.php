@@ -69,17 +69,22 @@ class TareaController
 		if(isset($args)){
 			$idtarea = $args["idtarea"];
 		} else {
-			$errores ="<br/> Id de la tarea";
+			$errores ="\nId de la tarea";
 			$enviar = false;
 		}
 		if($data["titulo"]==null){
 			$enviar = false;
 			$errores.="\ntítulo de la tarea";
 		}
+		if($data["valid"]==null){
+			$enviar = false;
+			$errores.="\nvalid de la tarea";
+		}
 		if($enviar){
 			$tareaVO = new TareaVO();
 			$tareaVO->setIdTarea($idtarea);
 			$tareaVO->setTitulo($data["titulo"]);
+			$tareaVO->setValid($data["valid"]);
     	$respuesta = $this->c->TareaService->editar($tareaVO);
 		} else {
 			$respuesta = array("result"=>false, "errores"=>$errores);
@@ -102,7 +107,7 @@ class TareaController
 		$errores = "Le faltó:";
 		if($idtarea==null){
 			$enviar = false;
-			$errores ="<br/> Id de la tarea";
+			$errores ="\nId de la tarea";
 		}
 		if($enviar){
 			$tareaVO = new TareaVO();
@@ -129,7 +134,7 @@ class TareaController
 		$errores = "Le faltó:";
 		if($pag==null){
 			$enviar = false;
-			$errores.="n\Ingresar la página";
+			$errores.="\nIngresar la página";
 		}
 		if($enviar){
 			if($pag>0){
@@ -159,7 +164,7 @@ class TareaController
 		$errores = "Le faltó:";
 		if($idtarea==null){
 			$enviar = false;
-			$errores.="n\Ingresar el id tarea";
+			$errores.="\nIngresar el id tarea";
 		}
 		if($enviar){
     	$respuesta = $this->c->TareaService->obtenerConID($idtarea);
@@ -184,7 +189,7 @@ class TareaController
 		$errores = "Le faltó:";
 		if($idusuario==null){
 			$enviar = false;
-			$errores.="n\Ingresar el id usuario";
+			$errores.="\nIngresar el id usuario";
 		}
 		if($enviar){
     	$respuesta = $this->c->TareaService->obtenerConIDUsuario($idusuario);

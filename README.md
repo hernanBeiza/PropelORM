@@ -13,6 +13,19 @@ Ejecutar
 composer propel:reverse
 ```
 
+## Atención
+
+- Atención a las llaves de la tabla usuariotarea
+- Revisar namespace del esquema. Debe ser PropelORMAPI\ORM
+``
+<database name="default" defaultIdMethod="native" defaultPhpNamingMethod="underscore" namespace="PropelORMAPI\ORM">
+``
+- Agregar el atributo isCrossRef="true" en la tabla relacional UsuarioTarea (si no se hace esto y se egeneran los modelos, al usar addTarea arrojará eerror de metodo sin definir "addTarea")
+
+``
+  <table name="usuariotarea" idMethod="native" phpName="Usuariotarea"  isCrossRef="true">
+``
+
 ## Generar configuración de conexión a la db
 
 Ejecutar
