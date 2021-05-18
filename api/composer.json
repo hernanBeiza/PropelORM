@@ -35,7 +35,7 @@
     "propel":"propel",
     "propel:init":"propel init",
     "propel:reverse:config":"propel reverse --config-dir='config'",
-    "propel:reverse":"propel reverse 'mysql:host=192.168.56.101;dbname=tareadb;user=root;password=0C3v8ea0;charset=UTF8' --verbose --output-dir='propel/schema'",
+    "propel:reverse":"propel reverse 'mysql:host=localhost:3306;dbname=tareadb;user=root;password=mypass123;charset=UTF8' --verbose --output-dir='propel/schema'",
     "propel:sql":"propel sql:build --config-dir='config' --schema-dir='propel/schema' --output-dir='propel/sql'",
     "propel:build2":"propel model:build --config-dir='config' --schema-dir='propel/schema' --output-dir='src/DAOS'",
     "propel:build":"propel model:build --config-dir='config' --schema-dir='propel/schema'",

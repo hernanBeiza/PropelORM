@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<database name="tareaconnection" defaultIdMethod="native" defaultPhpNamingMethod="underscore" namespace="PropelORMAPI\ORM">
+<database name="default" defaultIdMethod="native" defaultPhpNamingMethod="underscore" namespace="PropelORMAPI\ORM">
   <table name="tarea" idMethod="native" phpName="Tarea">
     <column name="idtarea" phpName="Idtarea" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
     <column name="titulo" phpName="Titulo" type="VARCHAR" size="100" required="true" defaultValue=""/>
